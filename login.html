@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url('https://pic1.zhimg.com/v2-af278ff13e632ba10eb5177190f25584_r.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* margin: 0; 移除默认的margin */
+            height: 100vh;
+            /* 视口高度的100% */
+            /* 视口宽度的100%，但通常body默认就是这些尺寸 */
+        }
+
+        .left {
+            width: 399px;
+            height: 425px;
+            border-right: 1px solid #000;
+            background: white;
+            border-top-left-radius: 18px;
+            border-bottom-left-radius: 18px;
+            align-items: center;
+            display: flex;
+        }
+
+        .border {
+            width: 800px;
+            height: 425px;
+            border: 1px solid #000;
+            border-radius: 18px;
+            background: white;
+            margin: 80px auto;
+            align-items: center;
+            display: flex;
+        }
+
+        .right {
+            width: 400px;
+            height: 425px;
+            background: white;
+            border-bottom-right-radius: 18px;
+            border-top-right-radius: 18px;
+            align-items: center;
+            display: flex;
+        }
+
+        form {
+            margin: 0 auto;
+            height: 400px;
+        }
+
+        input {
+            border-radius: 6px;
+            font-size: 20px;
+
+        }
+
+        form>div {
+            height: 50px;
+            width: 300px;
+            align-items: center;
+            display: flex;
+        }
+
+        .size {
+            height: 35px;
+            width: 300px;
+        }
+
+        .button {
+            padding: 3px 128px;
+            background-color: #58a1f4d8;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <div class="border">
+        <div class="left">
+            <div style="width: 300px;height: 370px;margin: auto;">
+                <div>扫码登录</div>
+
+            </div>
+        </div>
+        <div class="right">
+            <form action="wx.login()">
+                <div style="border-bottom: 5px solid #58a1f4d8;width: 65px;">账号登录</div>
+                <div></div>
+                <div>
+                    <input type="text" id="email" placeholder="用户名/邮箱" class="size">
+                </div>
+                <div><input type="password" id="password" placeholder="密码" class="size"></div>
+                <div><span id="forgetpwd" style="height: 30px;width: 230px;color: #4fd5ed;">忘记密码？</span>
+                    <a href="#" style="text-decoration: none;">立即注册</a>
+                </div>
+                <div><input type="submit" value="登录" class="button"></div>
+            </form>
+        </div>
+    </div>
+    </div>
+    <script>
+        
+        wx.config({
+            debug: true, // 开启调试模式
+            appId: '你的AppID', // 必填，公众号的唯一标识 
+            timestamp: '生成签名的时间戳', // 必填，生成签名的时间戳
+            nonceStr: '生成签名的随机串', // 必填，生成签名的随机串 
+            signature: '签名', // 必填，签名 
+            jsApiList: ['checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表   
+        });
+        wx.login({
+            success: function (res) {
+                if (res.code) {
+                    // 使用返回的code去后端换取access_token等信息   
+                } else {
+                    console.log('登录失败！' + res.errMsg);
+                }
+            }
+        });
+
+        wx.error(function (res) {
+            // config信息验证失败会执行error函数，如签名过期导致验证失败
+            alert("Error: " + res.errMsg);
+        });
+        console.log(wx)
+    </script>
+
+
+</body>
+
+</html>
